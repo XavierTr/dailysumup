@@ -1,0 +1,2 @@
+DROP TABLE thing;
+DROP TABLE user;
