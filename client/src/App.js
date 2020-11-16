@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import Auth from './Auth/Auth';
+
+//Styling
+import "bootstrap/dist/css/bootstrap.min.css";
+import "shards-ui/dist/css/shards.min.css"
 
 class App extends Component {
 
     render() {
         return (
-            <h1>Bienvenue sur DailySumUp !</h1>
+            <React.Fragment>
+                <Auth />
+            </React.Fragment>
         );
     }
 }
