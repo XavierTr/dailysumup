@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 
 import { centeredForm } from './AuthStyle';
 
-import {serverAPI, storeToken, removeToken} from '../APIs';
+import {serverAPI, storeToken, removeToken, getAxiosAuthHeader} from '../APIs';
 
 export default function Auth() {
 

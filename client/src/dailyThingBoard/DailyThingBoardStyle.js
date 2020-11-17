@@ -1,7 +1,9 @@
 export const board = {
     minWidth: '300px',
     maxWidth: '700px',
-    margin: 'auto'
+    margin: 'auto',
+    paddingLeft: '30px',
+    paddingRight: '30px'
 }
 
 export const header = {

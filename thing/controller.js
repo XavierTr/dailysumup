@@ -37,3 +37,27 @@ exports.addDailyThing = function(req, res, next) {
     })
     .catch(err => { next(err); })
 }
+
+exports.authorize_getDailyThing = (req, res, next) => {
+    conn('thing').where('id', req.params.id)
+    .then(obj => {
+        if(obj.length === 1) {
+            if(obj[0].user_id === req.user_id){
+                //Save the result in the request
+                req.tempRes = obj[0];
+                next();
+            }
+            else {
+                res.sendStatus(404);
+            }
+        }
+        else {
+            res.sendStatus(404);
+        }
+    })
+    .catch(err => next(err));
+}
+
+exports.getDailyThing = (req, res, next) => {
+    res.json(req.tempRes);    
+}
