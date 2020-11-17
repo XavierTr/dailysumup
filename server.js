@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 
 const app = express();
-const port = process.env.API_PORT;
+const port = process.env.PORT;
 const JwtAuth = require('./auth/middleware/jwtAuth');
 
 app.use(bodyParser.json());
