@@ -7,7 +7,7 @@ const { errors } = require('celebrate');
 
 const app = express();
 const port = process.env.PORT;
-const JwtAuth = require('./auth/middleware/jwtAuth');
+const JwtAuth = require('./auth/middleware/JwtAuth');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
