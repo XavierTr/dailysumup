@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const serverAPI = axios.create({
-    baseURL: process.env.API_URL || 'http://localhost:3000'
+    baseURL: '/'
 });
 
 const getAxiosAuthHeader = () => {
