@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import validator from 'validator';
 import { Form, FormInput, FormGroup, Button, Alert } from "shards-react";
+import Cookies from 'js-cookie';
+
 import { centeredForm } from './AuthStyle';
 
-import {serverAPI} from '../APIs';
+import {serverAPI, storeToken, removeToken} from '../APIs';
 
 export default function Auth() {
 
@@ -31,9 +33,10 @@ export default function Auth() {
     const submit = () => {
       if(validateInput()) {
         setAuthError(null);
+        removeToken();
         serverAPI.post('/api/auth/', { email: identifier, password: password })
         .then(rep => {
-          console.log(rep.data.token);
+          storeToken(rep.data.token);
         })
         .catch(err => {
           setAuthError("Impossible de se connecter. Merci de vérifier les identifiants ainsi que votre accès internet.")

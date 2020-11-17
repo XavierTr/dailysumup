@@ -1,7 +1,24 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const serverAPI = axios.create({
     baseURL: process.env.API_URL || 'http://localhost:3000'
 });
 
-export { serverAPI };
+const getAxiosAuthHeader = () => {
+    return {
+        headers: {
+            Authorization: `Bearer ${Cookies.get('jwt-token')}`
+        }
+    };
+}
+
+const storeToken = (token) => {
+    Cookies.set('jwt-token', token);
+}
+
+const removeToken = () => {
+    Cookies.remove('jwt-token');
+}
+
+export { serverAPI, storeToken, removeToken, getAxiosAuthHeader };
