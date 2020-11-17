@@ -11,12 +11,21 @@ const JwtAuth = require('./auth/middleware/jwtAuth');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//Routing
+//React app resources
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+//API Routing
 const authRouter = require('./auth/router');
 app.use('/api/auth', authRouter);
 
 const thingRouter = require('./thing/router');
 app.use('/api/thing', JwtAuth, thingRouter);
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 //Error handling
 app.use(errors())

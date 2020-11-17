@@ -21,4 +21,7 @@ const removeToken = () => {
     Cookies.remove('jwt-token');
 }
 
-export { serverAPI, storeToken, removeToken, getAxiosAuthHeader };
+const isUserLogged = () => {
+    return (typeof Cookies.get('jwt-token') !== 'undefined') ? true : false;
+}
+export { serverAPI, storeToken, removeToken, getAxiosAuthHeader, isUserLogged };

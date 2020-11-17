@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import validator from 'validator';
 import { Form, FormInput, FormGroup, Button, Alert } from "shards-react";
-import Cookies from 'js-cookie';
 
 import { centeredForm } from './AuthStyle';
 
-import {serverAPI, storeToken, removeToken, getAxiosAuthHeader} from '../APIs';
+import {serverAPI, storeToken, removeToken, isUserLogged} from '../APIs';
+import { Redirect, useHistory } from "react-router-dom";
 
 export default function Auth() {
 
@@ -15,6 +15,8 @@ export default function Auth() {
     const [invalidEmail, setInvalidEmail] = useState(false);
     const [invalidPassword, setInvalidPassword] = useState(false);
     const [authError, setAuthError] = useState();
+
+    const history = useHistory();
 
     const validateInput = () => {
     
@@ -37,6 +39,7 @@ export default function Auth() {
         serverAPI.post('/api/auth/', { email: identifier, password: password })
         .then(rep => {
           storeToken(rep.data.token);
+          history.push('/');
         })
         .catch(err => {
           setAuthError("Impossible de se connecter. Merci de vérifier les identifiants ainsi que votre accès internet.")
@@ -47,6 +50,7 @@ export default function Auth() {
     return (
       <React.Fragment>
 
+        { isUserLogged === true ? <Redirect to={{pathname:"/"}} /> : null }
 
         {authError ? 
           <Alert theme="danger"> {authError} </Alert> : null
